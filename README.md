@@ -6,8 +6,8 @@ Instead of running separate, heavy Docker containers for every single project (l
 
 ## Features
 - **Multi-PHP Support:** Run projects on PHP 7.4, 8.3, or 8.4 simultaneously.
-- **Optimized for Dev:** Includes Xdebug (Coverage mode), OPcache (Dev mode), Redis, and common PHP extensions.
-- **Centralized Infrastructure:** Nginx, MySQL 8.0, and Redis shared across all projects.
+- **Optimized for Dev:** Includes Xdebug (Coverage mode), OPcache (Dev mode), and common PHP extensions.
+- **Centralized Infrastructure:** Nginx shared across all projects.
 - **Local Domains:** Easily map projects to custom `.test` domains.
 
 ---
@@ -32,7 +32,7 @@ working-space/
    ```bash
    cp .env.example .env
    ```
-   *(Optional: Edit `.env` to change default ports or the MySQL root password).*
+   *(Optional: Edit `.env` to change default ports).*
 
 2. **Build and Start:**
    ```bash
@@ -85,21 +85,4 @@ cd project-2
 composer install
 ```
 
----
 
-## Connecting Services
-
-When connecting your applications (like Laravel) to the database or cache, use the internal Docker network hostnames, not `localhost`.
-
-### MySQL
-- **Host:** `mysql`
-- **Port:** `3306`
-- **Username:** `root`
-- **Password:** `root` (or whatever is in your `.env`)
-
-### Redis
-- **Host:** `redis`
-- **Port:** `6379`
-- **Password:** `null` (unless manually configured)
-
-*(Note: If you are connecting from a GUI tool on your host machine like DBeaver or TablePlus, use `127.0.0.1` as the host instead).*
