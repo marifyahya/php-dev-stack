@@ -1,0 +1,39 @@
+# -----------------------------------------------------------------------------
+# Sample Nginx Configuration for a Laravel Application
+# -----------------------------------------------------------------------------
+# Instructions:
+# 1. Copy this file: `cp example-app.conf.sample my-new-app.conf`
+# 2. Replace all instances of `example-app` with your actual project folder name.
+# 3. Choose your PHP version (e.g., `php83:9000` or `php74:9000`).
+# 4. Restart Nginx: `docker compose restart nginx` (run from the local-dev folder).
+# 5. Add `example-app.test` to your /etc/hosts file.
+# -----------------------------------------------------------------------------
+
+server {
+    listen 80;
+    
+    # The custom local domain you want to use in your browser
+    server_name example-app.test;
+    
+    # Path to the public folder of your Laravel project (mapped from the parent directory)
+    root /var/www/html/example-app/public;
+
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        # Change this to your desired PHP container (php83:9000 or php74:9000)
+        fastcgi_pass php83:9000;
+        
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    # Log files will be created inside the Nginx container
+    error_log  /var/log/nginx/example-app_error.log;
+    access_log /var/log/nginx/example-app_access.log;
+}
