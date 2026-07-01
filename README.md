@@ -5,7 +5,7 @@ A fast, lightweight, and centralized Docker environment designed specifically fo
 Instead of running separate, heavy Docker containers for every single project (like Laravel Sail), this stack runs one single, shared set of services on your local machine. This saves your computer's resources (RAM/CPU) while allowing you to host and work on multiple PHP applications simultaneously. 
 
 ## Features
-- **Multi-PHP Support:** Run projects on PHP 7.4 or 8.3 simultaneously.
+- **Multi-PHP Support:** Run projects on PHP 7.4, 8.3, or 8.4 simultaneously.
 - **Optimized for Dev:** Includes Xdebug (Coverage mode), OPcache (Dev mode), Redis, and common PHP extensions.
 - **Centralized Infrastructure:** Nginx, MySQL 8.0, and Redis shared across all projects.
 - **Local Domains:** Easily map projects to custom `.test` domains.
@@ -54,7 +54,7 @@ To add a new project (e.g., `project-3`) to the stack:
    Edit `project-3.conf` and update:
    - `server_name` (e.g., `project-3.test`)
    - `root` (e.g., `/var/www/html/project-3/public`)
-   - `fastcgi_pass` (Choose `php74:9000` or `php83:9000`)
+   - `fastcgi_pass` (Choose `php74:9000`, `php83:9000`, or `php84:9000`)
 3. **Restart Nginx:**
    ```bash
    docker compose restart nginx
